@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sent Request</title>
+</head>
+<body>
+    <% if(data.length>0){ %>
+      
+        <div>
+            <% for (records of data){%>
+                <div>
+                    <ul>
+                        
+                        <li>
+                            <a href="/otherProfile/<%= records.data.username%>">
+                            <div>
+                                <h3>Name: <%= records.data.name%></h3>
+                                <h4><%= records.data.username%> </h4>
+                                <a href="/withdraw/<%= records.data.username%>">Withdraw</a>  
+                            </div></a>
+                       
+                    </li>
+                    </ul>
+                </div>
+                <% } %>
+        </div>
+             <%} else {%>
+                <h2> No sent request , Try sending some !!
+             <%}%>
+</body>
+</html>

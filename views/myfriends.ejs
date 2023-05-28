@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My friends</title>
+</head>
+<body>
+       <h3> Here are the people you are friends with : </h3>
+       <% if(data.length>0){ %>
+
+        <div>
+            <% for (records of data){%>
+                <div>
+                    <ul>
+                        <a href="/otherProfile/<%= records.data.username%>">
+                            <div>
+                                <h3>Name: <%= records.data.name%></h3>
+                                <h4><%= records.data.username%> </h4>    
+                            </div></a>
+                    </ul>
+                </div>
+                <% } %>
+        </div>
+             <%} else {%>
+                <h2> No Friends yet, Add one  !!
+             <%}%>
+
+</body>
+</html>

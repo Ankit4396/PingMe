@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Other profile</title>
+</head>
+<body>
+      
+    <h1> Profile Details </h1>
+    <!-- <a href="/dashboard/<%= data.name%>">Dashboard</a> -->
+    <h5><p>About:<%= data.about%></p></h5>
+    <% if(friend == null && sentFriendReq  == null && pendingFriendReq == null){ %>
+        <div>
+                   <a href="/addFriend/<%= data.username%>"+data.username>Add Friend</a>
+        </div>   
+
+    <% } else if(pendingFriendReq != null ) {%>
+        <div>
+            <a href="/accepted_req/<%=data.username%>">Accept</a>
+            <a href="/declined/<%=data.username%>">Decline</a>
+ </div>  
+ <% } else if(sentFriendReq != null) {%>
+    <div>
+            <a href="/revFriendReq/<%= data.username%>">Friend Request Sent</a>
+    </div>  
+      
+      <% } else {%>
+         <div>
+                 <h5>Friends Tick Mark</h5>   <a href="/unfriend/<%=data.username%>">Unfriend</a>
+         </div>  
+     <%}%>
+    <div>
+        <ul>
+        <a href="/otherfriends_list/<%=data.username%>"><li><p>Friends:<%=data.friend_counts%></p></li></a>
+        </ul>
+    </div>
+
+    <h2>General Information</h2>
+    <br><br>
+    <div>
+        <ul>
+            <li><p>Name:<%=data.name%></p></li>
+            <li><p>ProfilePic:<%=data.profilePic%></p></li>
+            <li><p>Email:<%=data.email%></p></li>
+            <li><p>username:<%=data.username%></p></li>
+            <li><p>Gender:<%=data.gender%></p></li>
+            <li><p>Dob:</p><%=data.dob%></li>
+            <li><p>Joined At:<%=data.createdAt%></p></li>
+        </ul>
+       
+
+    </div>
+
+
+
+
+
+</body>
+</html>
