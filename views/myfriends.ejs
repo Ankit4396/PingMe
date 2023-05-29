@@ -12,6 +12,7 @@
     
     <header class="header">
         <nav class="navbar">
+        <a href="/dashboard/<%= records.data.username%>">Dashboard</a>     
        <a href="/logout">Logout</a>
        <a href="/myprofile">My Profile</a>
        </nav>
@@ -33,13 +34,19 @@
 
        
                 <% for (records of data){%>
+                    
                     <div class="user-row">
                     <div class="user-info">
+                        
                         <img src="/images/male.png" alt="user">
+                        <% if(records.data.active==true){ %>
+                            <span class="active"></span>
+                            <%}%>
                             <a href="/otherProfile/<%= records.data.username%>">
                                
                                     <span><%= records.data.name%></span>  
                                 </a>
+                                
                                 <!-- <button class="action-follow">
                                     Follow
                                 </button> -->

@@ -116,6 +116,7 @@
   right: 0;
   background-color: rgb(244, 218, 245); /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
+  overflow-y: auto;
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
 }
@@ -162,7 +163,19 @@
   background-color: #444;
 }
 
-
+ .sidebar  .active{
+  position: relative;
+  background: #2afa6a;
+  width: 16px;
+  height:16px;
+  border-radius: 50%;
+  bottom: 3px;
+  border: 2px solid #fff;
+  display: -webkit-inline-box;
+  top: -37px;
+  left: -10px;
+  
+}
 
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */

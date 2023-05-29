@@ -97,7 +97,8 @@ exports.dashboard = async(req,res,next)=>{
      from: 1, 
      to:1,
      "data.name": 1,
-     "data.username":1
+     "data.username":1,
+     "data.active":1
  
  
  }
@@ -182,7 +183,7 @@ $lookup:{
          as: "data"
 }
 },
-{
+{ 
 $unwind: {
     'path': '$data'
 }
@@ -192,7 +193,11 @@ $project: {
     from: 1, 
     to:1,
     "data.name": 1,
-    "data.username":1
+    "data.username":1,
+    "data.profilePic":1,
+    "data.gender":1,
+    "data.active":1,
+
 
 
 }
@@ -234,7 +239,10 @@ $project: {
     from: 1, 
     to:1,
     "data.name": 1,
-    "data.username":1
+    "data.username":1,
+    "data.profilePic":1,
+    "data.gender":1,
+    "data.active":1,
 
 
 }
@@ -285,7 +293,10 @@ exports.sentRequest = async(req,res,next)=>{
         from: 1, 
         to:1,
         "data.name": 1,
-        "data.username":1
+        "data.username":1,
+        "data.profilePic":1,
+        "data.gender":1,
+        "data.active":1,
 
 
     }

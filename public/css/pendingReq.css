@@ -156,15 +156,5 @@ body{
   
   }
   
-  .friends-body .user-row .user-info  .active{
-    position: relative;
-    background: #2afa6a;
-    width: 16px;
-    height:16px;
-    border-radius: 50%;
-    bottom: 3px;
-    border: 2px solid #fff;
-    left: -22px;
-    
-}
+
   
