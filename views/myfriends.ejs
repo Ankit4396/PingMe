@@ -5,27 +5,83 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My friends</title>
+    <link rel="stylesheet" type="text/css" href="/css/myFriends.css" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' >
 </head>
 <body>
-       <h3> Here are the people you are friends with : </h3>
-       <% if(data.length>0){ %>
+    
+    <header class="header">
+        <nav class="navbar">
+        <a href="/dashboard/<%= records.data.username%>">Dashboard</a>     
+       <a href="/logout">Logout</a>
+       <a href="/myprofile">My Profile</a>
+       </nav>
+       <form action="/searchProfile" class ="search-bar" method="POST">
+       <input type="text" name="search" placeholder="Search Username" required/>
+       <button type="submit"><i class='bx bx-search'></i></button>
+        </form>
+       </header>        
+   <div class="imgBX">
+    <img src="/images/98.jpg" style="width: 55%;">
+   </div>
+<div class="friends-body">
+    <h3 style="font-family: fantasy;   text-align: center;
+    border-bottom: 4px solid #ff4584;
+    letter-spacing: 2px;"> Here are the people you are friends with : </h3>
+    
+       
+            <% if(data.length>0){ %>
 
-        <div>
-            <% for (records of data){%>
-                <div>
-                    <ul>
-                        <a href="/otherProfile/<%= records.data.username%>">
-                            <div>
-                                <h3>Name: <%= records.data.name%></h3>
-                                <h4><%= records.data.username%> </h4>    
-                            </div></a>
-                    </ul>
+       
+                <% for (records of data){%>
+                    
+                    <div class="user-row">
+                    <div class="user-info">
+                        
+                        <img src="/images/male.png" alt="user">
+                        <% if(records.data.active==true){ %>
+                            <span class="active"></span>
+                            <%}%>
+                            <a href="/otherProfile/<%= records.data.username%>">
+                               
+                                    <span><%= records.data.name%></span>  
+                                </a>
+                                
+                                <!-- <button class="action-follow">
+                                    Follow
+                                </button> -->
+                    </div>
+                    <!-- <button class="action-follow">
+                                    Follow
+                                </button> -->
                 </div>
-                <% } %>
-        </div>
-             <%} else {%>
-                <h2> No Friends yet, Add one  !!
-             <%}%>
+                
+                    <% } %>
+          
+                 <%} else {%>
+                    <h2> No Friends yet, Add one  !!
+                 <%}%>
+                </div>      
+     
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+      
 
 </body>
 </html>

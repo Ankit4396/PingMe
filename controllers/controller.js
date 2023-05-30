@@ -97,7 +97,8 @@ exports.dashboard = async(req,res,next)=>{
      from: 1, 
      to:1,
      "data.name": 1,
-     "data.username":1
+     "data.username":1,
+     "data.active":1
  
  
  }
@@ -182,7 +183,7 @@ $lookup:{
          as: "data"
 }
 },
-{
+{ 
 $unwind: {
     'path': '$data'
 }
@@ -192,7 +193,11 @@ $project: {
     from: 1, 
     to:1,
     "data.name": 1,
-    "data.username":1
+    "data.username":1,
+    "data.profilePic":1,
+    "data.gender":1,
+    "data.active":1,
+
 
 
 }
@@ -234,7 +239,10 @@ $project: {
     from: 1, 
     to:1,
     "data.name": 1,
-    "data.username":1
+    "data.username":1,
+    "data.profilePic":1,
+    "data.gender":1,
+    "data.active":1,
 
 
 }
@@ -285,7 +293,10 @@ exports.sentRequest = async(req,res,next)=>{
         from: 1, 
         to:1,
         "data.name": 1,
-        "data.username":1
+        "data.username":1,
+        "data.profilePic":1,
+        "data.gender":1,
+        "data.active":1,
 
 
     }
@@ -356,10 +367,18 @@ exports.registration = async (req,res,next)=>{
     }
 }
 
-exports.logout = (req,res,next)=>{
+exports.logout = async(req,res,next)=>{
    try{
      res.clearCookie('jwt')
      console.log("jwttoken is ", req.cookies)
+     await User.updateOne({_id:req.user._id},
+        
+        {
+            $set:{
+                active : false
+            }
+        }        
+        ).exec(); 
      console.log("Logout Succefully");
      res.redirect('/')
    }catch(err){
@@ -587,6 +606,8 @@ exports.otherdetails = async (req,res,next)=>{
     const friendship = await FriendDB.Friends.findOne({from:req.user._id, to: data._id})
     const friendshipReq = await FriendDB.PendingRequests.findOne({from:data._id, to: req.user._id})
     const sentfriendshipReq = await FriendDB.SentRequest.findOne({from:req.user._id, to: data._id})
+    const loggedInUser = await fetch(`http://localhost:3000/userdetails?id=${req.user._id}`);
+    const loggedInUserData = await loggedInUser.json()
     if(data._id === req.user._id){
         res.redirect("/myprofile")        
     }
@@ -596,7 +617,8 @@ exports.otherdetails = async (req,res,next)=>{
         data:data,
         friend:friendship,
         pendingFriendReq: friendshipReq,
-        sentFriendReq: sentfriendshipReq
+        sentFriendReq: sentfriendshipReq,
+        admin:loggedInUserData
      })
     }
      next()
@@ -632,8 +654,15 @@ exports.login = (req,res,next)=>{
 
                          const token =   await generateAuthToken(user);
                          res.cookie("jwt",token);
-                        console.log(req.cookies.jwt)                        
-                         res.locals.username = user.name
+                        console.log(req.cookies.jwt)        
+                        await User.updateOne({_id:user._id},
+        
+                            {
+                                $set:{
+                                    active : true
+                                }
+                            }        
+                            ).exec();                
                         res.redirect(`/dashboard/${user.username}`)
                          next()
                         

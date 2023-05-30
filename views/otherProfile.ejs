@@ -1,61 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Other profile</title>
+    <title>Other Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/myProfile.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
+
 <body>
-      
-    <h1> Profile Details </h1>
-    <!-- <a href="/dashboard/<%= data.name%>">Dashboard</a> -->
-    <h5><p>About:<%= data.about%></p></h5>
-    <% if(friend == null && sentFriendReq  == null && pendingFriendReq == null){ %>
-        <div>
-                   <a href="/addFriend/<%= data.username%>"+data.username>Add Friend</a>
-        </div>   
 
-    <% } else if(pendingFriendReq != null ) {%>
-        <div>
-            <a href="/accepted_req/<%=data.username%>">Accept</a>
-            <a href="/declined/<%=data.username%>">Decline</a>
- </div>  
- <% } else if(sentFriendReq != null) {%>
-    <div>
-            <a href="/revFriendReq/<%= data.username%>">Friend Request Sent</a>
-    </div>  
-      
-      <% } else {%>
-         <div>
-                 <h5>Friends Tick Mark</h5>   <a href="/unfriend/<%=data.username%>">Unfriend</a>
-         </div>  
-     <%}%>
-    <div>
-        <ul>
-        <a href="/otherfriends_list/<%=data.username%>"><li><p>Friends:<%=data.friend_counts%></p></li></a>
-        </ul>
+
+
+
+
+
+
+    <div class="header__wrapper">
+        <header>
+
+        </header>
+        <div class="cols__container">
+            <div class="left__col">
+                <div class="img__container">
+                    <% if(data.profilePic==null && (data.gender=="Male"  || data.gender == "NA")){ %>
+                        <img src="/images/male.png" alt="<%= data.username%>" />
+                        <% } else if(data.profilePic==null && data.gender=="Female" ) {%>
+                            <img src="/images/female.png" alt="<%= data.username%>" />
+                            <%}%>
+
+                                <% if(data.active==true){ %>
+                                    <span></span>
+                                    <%}%>
+
+                </div>
+                <h2>
+                    <%= data.name%>
+                </h2>
+                <p>
+                    <%=data.username%>
+                </p>
+                <p style="color: black;
+                  font-family: fantasy;">About:<%= data.about%>
+                </p>
+                <ul class="about">
+                    <% if(friend==null && sentFriendReq==null && pendingFriendReq==null){ %>
+
+                        <a href="/addFriend/<%= data.username%>">
+                            <li>
+                                <h4 style="color: darkblue; font-family: fantasy">Add Friend</h4>
+                            </li>
+                        </a>
+
+
+                        <% } else if(pendingFriendReq !=null ) {%>
+                            <a href="/accepted_req/<%=data.username%>">
+                                <li>
+                                    <h4 style="color: darkblue; font-family: fantasy">Accept</h4>
+                                </li>
+                            </a>
+                            <a href="/declined/<%=data.username%>">
+                                <li>
+                                    <h4 style="color: darkblue; font-family: fantasy">Decline</h4>
+                                </li>
+                            </a>
+
+
+                            <% } else if(sentFriendReq !=null) {%>
+                                <a href="/revFriendReq/<%= data.username%>">
+                                    <li>
+                                        <h4 style="color: darkblue; font-family: fantasy">Friend Request Sent</h4>
+                                    </li>
+                                </a>
+
+
+
+                                <% } else {%>
+                                    <a href="/unfriend/<%=data.username%>">
+                                        <li>
+                                            <h4 style="color: darkblue; font-family: fantasy">Unfriend</h4>
+                                        </li>
+                                    </a>
+                                    <li>
+                                        <h4 style="color: darkblue; font-family: fantasy"><span
+                                                class="material-symbols-outlined">
+                                                how_to_reg
+                                            </span></h4>
+                                    </li>
+
+
+                                    <%}%>
+                                        <a href="/otherfriends_list/<%=data.username%>">
+                                            <li><span>
+                                                    <%=data.friend_counts%>
+                                                </span>
+                                                <h4 style="color: darkblue; font-family: fantasy">Friends</h4>
+                                            </li>
+                                        </a>
+
+                </ul>
+                <div class="content">
+                    <h2 style="font-size: 14px;">General Information</h2>
+                    <ul>
+                        <li>
+                            <p>Name: <%=data.name%>
+                            </p>
+                        </li><br>
+                        <li>
+                            <p>Email: <%=data.email%>
+                            </p>
+                        </li><br>
+                        <li>
+                            <p>username: <%=data.username%>
+                            </p>
+                        </li><br>
+                        <li>
+                            <p>Gender: <%=data.gender%>
+                            </p>
+                        </li><br>
+                        <li>
+                            <p>Dob: <%=data.dob%>
+                            </p>
+                        </li><br>
+                        <li>
+                            <p>Joined At: <%=data.createdAt%>
+                            </p>
+                        </li><br>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <h2>General Information</h2>
-    <br><br>
-    <div>
-        <ul>
-            <li><p>Name:<%=data.name%></p></li>
-            <li><p>ProfilePic:<%=data.profilePic%></p></li>
-            <li><p>Email:<%=data.email%></p></li>
-            <li><p>username:<%=data.username%></p></li>
-            <li><p>Gender:<%=data.gender%></p></li>
-            <li><p>Dob:</p><%=data.dob%></li>
-            <li><p>Joined At:<%=data.createdAt%></p></li>
-        </ul>
-       
-
-    </div>
-
-
-
-
-
+    <h1 style="position: absolute;right: 9%;top: 39%; color: blueviolet; border-bottom: 4px solid #ff4584;
+        display: inline-block;
+        letter-spacing: 1px; font-family: fantasy;"> Profile Details </h1>
+   
+   <a href="/dashboard/<%= admin.username%>" style="
+    position: absolute;
+    top: 39%;
+    left: 26px; color: blueviolet;
+"> <span class="material-symbols-outlined">
+        reply
+    </span> Dashboard </a>
 </body>
+
 </html>

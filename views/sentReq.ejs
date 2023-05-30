@@ -5,30 +5,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sent Request</title>
+    <link rel="stylesheet" type="text/css" href="/css/sentReq.css" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' >
 </head>
 <body>
-    <% if(data.length>0){ %>
-      
-        <div>
-            <% for (records of data){%>
-                <div>
-                    <ul>
-                        
-                        <li>
+
+    <header class="header">
+        <nav class="navbar">
+        <a href="/dashboard/<%= records.data.username%>">Dashboard</a>     
+       <a href="/logout">Logout</a>
+       <a href="/myprofile">My Profile</a>
+       </nav>
+       <form action="/searchProfile" class ="search-bar" method="POST">
+       <input type="text" name="search" placeholder="Search Username" required/>
+       <button type="submit"><i class='bx bx-search'></i></button>
+        </form>
+       </header>        
+   <div class="imgBX">
+    <img src="/images/98.jpg" style="width: 55%;">
+   </div>
+<div class="friends-body">
+    <h3 style="font-family: fantasy;   text-align: center;
+    border-bottom: 4px solid #ff4584;
+    letter-spacing: 2px;"> Here are the people you sent request : </h3>
+    
+       
+            <% if(data.length>0){ %>
+
+       
+                <% for (records of data){%>
+                    <div class="user-row">
+                    <div class="user-info">
+                        <% if(records.data.profilePic==null && records.data.gender=="Male" ){ %>
+                            <img src="/images/male.png" alt="<%= records.data.username%>" />
+                            <% } else if(records.data.profilePic==null && records.data.gender=="Female" ) {%>
+                                <img src="/images/female.png" alt="<%= records.data.username%>" />
+                                <%}%>
+    
+                                    
                             <a href="/otherProfile/<%= records.data.username%>">
-                            <div>
-                                <h3>Name: <%= records.data.name%></h3>
-                                <h4><%= records.data.username%> </h4>
-                                <a href="/withdraw/<%= records.data.username%>">Withdraw</a>  
-                            </div></a>
-                       
-                    </li>
-                    </ul>
+                               
+                                    <span><%= records.data.name%></span>   
+                                </a>
+                                
+                                <a href="/withdraw/<%= records.data.username%>"><button class="action-follow"   style="position: relative;
+                                    top: 22%;
+                                    left: 198%;"  >
+                                    Withdraw
+                                </button></a>
+                            
+                    </div>
+                    <!-- <button class="action-follow">
+                                    Follow
+                                </button> -->
                 </div>
-                <% } %>
-        </div>
-             <%} else {%>
-                <h2> No sent request , Try sending some !!
-             <%}%>
+                
+                    <% } %>
+          
+                 <%} else {%>
+                    <h2> No sent request , Try sending some !!
+                 <%}%>
+                </div>      
+     
+    
+</div>
 </body>
 </html>
